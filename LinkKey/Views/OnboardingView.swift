@@ -9,6 +9,7 @@ enum OnboardingStep {
     case platformSelection
     case iMessagePermissions
     case googleMessagesSetup
+    case featureOverview
 }
 
 struct OnboardingView: View {
@@ -30,12 +31,17 @@ struct OnboardingView: View {
             case .googleMessagesSetup:
                 GoogleMessagesSetupView(
                     onComplete: {
-                        AppStateManager.shared.hasSetup = true
-                        AppStateManager.shared.messagingPlatform = .googleMessages
-                        NSApplication.shared.keyWindow?.close()
+                        viewModel.currentStep = .featureOverview
                     },
                     onBack: {
                         viewModel.currentStep = .platformSelection
+                    }
+                )
+            case .featureOverview:
+                FeatureOverviewView(
+                    onComplete: {
+                        AppStateManager.shared.hasSetup = true
+                        NSApplication.shared.keyWindow?.close()
                     }
                 )
             }
@@ -138,12 +144,13 @@ struct IMessagePermissionsView: View {
 
                 Button(action: {
                     if viewModel.allPermissionsGranted {
-                        AppStateManager.shared.hasSetup = true
                         AppStateManager.shared.messagingPlatform = .iMessage
+                        viewModel.currentStep = .featureOverview
+                    } else {
+                        NSApplication.shared.keyWindow?.close()
                     }
-                    NSApplication.shared.keyWindow?.close()
                 }) {
-                    Text(viewModel.allPermissionsGranted ? "Done" : "Close")
+                    Text(viewModel.allPermissionsGranted ? "Next" : "Close")
                         .frame(minWidth: 80)
                 }
                 .buttonStyle(.borderedProminent)
@@ -152,6 +159,101 @@ struct IMessagePermissionsView: View {
             .padding(.vertical, 20)
         }
         .frame(minWidth: 600, minHeight: 500)
+    }
+}
+
+struct FeatureOverviewView: View {
+    let onComplete: () -> Void
+
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header
+            VStack(spacing: 12) {
+                Image("logo")
+                    .resizable()
+                    .interpolation(.high)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 60)
+
+                Text("How LinkKey Works")
+                    .font(.system(size: 24, weight: .bold))
+            }
+            .padding(.top, 30)
+            .padding(.bottom, 25)
+
+            Divider()
+
+            // Features Section
+            ScrollView {
+                VStack(alignment: .leading, spacing: 25) {
+                    FeatureRow(
+                        icon: "doc.on.clipboard.fill",
+                        title: "Auto-Copy & Paste",
+                        description: "LinkKey automatically extracts codes and copies them to your clipboard. If Accessibility is enabled, it even pastes them for you!"
+                    )
+
+                    FeatureRow(
+                        icon: "bell.fill",
+                        title: "Smart Notifications",
+                        description: "See the code immediately in a custom overlay or native notification."
+                    )
+
+                    FeatureRow(
+                        icon: "menubar.arrow.up.rectangle",
+                        title: "Menu Bar Access",
+                        description: "Access your last 3 codes anytime from the menu bar. No need to open Messages."
+                    )
+
+                    FeatureRow(
+                        icon: "keyboard",
+                        title: "Keyboard Shortcuts",
+                        description: "Press ⌥⌘R to resync if iMessage misses a code. Use ⌘V to paste normally (LinkKey restores your original clipboard after 5 seconds)."
+                    )
+                }
+                .padding(.horizontal, 40)
+                .padding(.vertical, 30)
+            }
+
+            Divider()
+
+            // Action
+            HStack {
+                Spacer()
+                Button(action: onComplete) {
+                    Text("Got it, let's go!")
+                        .frame(minWidth: 120)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
+            .padding(.horizontal, 30)
+            .padding(.vertical, 20)
+        }
+        .frame(minWidth: 600, minHeight: 500)
+    }
+}
+
+struct FeatureRow: View {
+    let icon: String
+    let title: String
+    let description: String
+
+    var body: some View {
+        HStack(spacing: 15) {
+            Image(systemName: icon)
+                .font(.system(size: 24))
+                .foregroundColor(.blue)
+                .frame(width: 40)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.system(size: 16, weight: .semibold))
+                Text(description)
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
     }
 }
 

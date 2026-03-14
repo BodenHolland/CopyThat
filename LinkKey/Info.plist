@@ -4,7 +4,7 @@
 <dict>
 	<key>NSAccessibilityUsageDescription</key>
 	<string>Accessiblity needed to automate copying codes to clipboard</string>
-	<key>LSUIElement</key>
+	<key>LSUIElement_DISABLED_DISABLED</key>
 	<true/>
 </dict>
 </plist>

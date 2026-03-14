@@ -62,16 +62,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let icon = NSImage(named: "TrayIcon")!
-        icon.isTemplate = true
         print("App Launched")
-
-        // Create the status item
+        
         let statusBar = NSStatusBar.system
-        statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
-        statusBarItem.button?.image = icon
+        statusBarItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
+        
+        if let icon = NSImage(named: "TrayIcon") {
+            print("Loaded TrayIcon asset successfully")
+            icon.isTemplate = true
+            icon.size = NSSize(width: 18, height: 18) // Force standard size
+            statusBarItem.button?.image = icon
+        } else {
+            print("FAILED to load TrayIcon asset, using SF Symbol fallback")
+            let fallbackIcon = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "LinkKey")
+            fallbackIcon?.isTemplate = true
+            statusBarItem.button?.image = fallbackIcon
+        }
+        
         statusBarItem.isVisible = true
+        statusBarItem.button?.title = "LinkKey" // Temporary to see if it shows up
+        print("StatusBarItem setup complete. Visible: \(statusBarItem.isVisible)")
 
+        NSApp.setActivationPolicy(.regular)
         NSApp.activate(ignoringOtherApps: true)
 
         if AppStateManager.shared.globalShortcutEnabled {
@@ -82,18 +94,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         setupKeyboardListener()
         setupNotifications()
 
+        print("Has Setup: \(AppStateManager.shared.hasSetup)")
+        print("Platform: \(AppStateManager.shared.messagingPlatform)")
+        print("FDA: \(AppStateManager.shared.hasFullDiscAccess())")
+        print("Accessibility: \(AppStateManager.shared.hasAccessibilityPermission())")
+
         if !AppStateManager.shared.hasSetup {
+            print("Logic: !hasSetup -> Opening Onboarding")
             AppStateManager.shared.shouldLaunchOnLogin = true
             AppStateManager.shared.globalShortcutEnabled = true
-            AppStateManager.shared.hasSetup = true
             openOnboardingWindow()
         } else if AppStateManager.shared.messagingPlatform == .iMessage {
-            // Only check permissions for iMessage - Google Messages doesn't need Full Disk Access
             if AppStateManager.shared.hasFullDiscAccess() != .authorized || !AppStateManager.shared.hasAccessibilityPermission() {
+                print("Logic: iMessage + Missing Permissions -> Opening Onboarding")
                 openOnboardingWindow()
+            } else {
+                print("Logic: iMessage + All Permissions -> NOT Opening Onboarding")
+                refreshActivationPolicy()
             }
+        } else {
+            refreshActivationPolicy()
         }
-
+        
+        refreshMenu()
     }
 
     func setupNotifications() {
@@ -447,13 +470,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func openOnboardingWindow() {
+        print("openOnboardingWindow called")
+        refreshActivationPolicy()
         if onboardingWindow == nil {
+            print("Creating new onboarding window")
             onboardingWindow = createOnboardingWindow()
+            // Listen for window closing to Refresh Policy
+            NotificationCenter.default.addObserver(self, selector: #selector(onboardingWindowDidClose(_:)), name: NSWindow.willCloseNotification, object: onboardingWindow)
+        } else {
+            print("Using existing onboarding window")
         }
         
         onboardingWindow?.center()
         onboardingWindow?.makeKeyAndOrderFront(nil)
+        print("Window ordered front. Visible: \(onboardingWindow?.isVisible ?? false)")
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    @objc func onboardingWindowDidClose(_ notification: Notification) {
+        refreshActivationPolicy()
+    }
+
+    func refreshActivationPolicy() {
+        if AppStateManager.shared.hasSetup {
+            NSApp.setActivationPolicy(.accessory)
+        } else {
+            NSApp.setActivationPolicy(.regular)
+        }
     }
     
     @objc func resync() {
