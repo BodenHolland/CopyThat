@@ -819,7 +819,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/soffes/HotKey";
 			requirement = {
-				branch = master;
+				branch = main;
 				kind = branch;
 			};
 		};
