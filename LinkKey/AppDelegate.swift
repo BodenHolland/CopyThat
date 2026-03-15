@@ -71,12 +71,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         if !AppStateManager.shared.hasSetup {
             NSLog("[LinkKey] Logic: !hasSetup -> Opening Onboarding")
+            NSApp.setActivationPolicy(.regular) // MUST set this before showing window
             AppStateManager.shared.shouldLaunchOnLogin = true
             AppStateManager.shared.globalShortcutEnabled = true
             openOnboardingWindow()
         } else if AppStateManager.shared.messagingPlatform == .iMessage {
             if !hasFDA || !hasAccess {
                 NSLog("[LinkKey] Logic: iMessage + Missing Permissions -> Opening Onboarding")
+                NSApp.setActivationPolicy(.regular) // MUST set this before showing window
                 openOnboardingWindow()
             } else {
                 NSLog("[LinkKey] Logic: iMessage + All Permissions -> Running as accessory")
@@ -85,6 +87,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         } else {
             refreshActivationPolicy()
         }
+        
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     func setupStatusBar() {
