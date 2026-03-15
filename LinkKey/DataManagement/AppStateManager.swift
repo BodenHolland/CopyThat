@@ -46,7 +46,7 @@ class AppStateManager {
     
     private struct Constants {
         // Helper Application Bundle Identifier
-        static let autoLauncherBundleID = "com.linkkey.app.AutoLauncher"
+        static let autoLauncherBundleID = "com.linkkey.app.boden.AutoLauncher"
         
         static let autoLauncherPrefKey = "com.linkkey.app.shouldAutoLaunch"
         static let globalShortcutEnabledKey = "com.linkkey.app.globalShortcutEnabled"
@@ -60,18 +60,32 @@ class AppStateManager {
         static let debugLoggingEnabledKey = "com.linkkey.app.debugLoggingEnabled"
         static let messagingPlatformKey = "com.linkkey.app.messagingPlatform"
         static let googleMessagesAppInstalledKey = "com.linkkey.app.googleMessagesAppInstalled"
+        static let currentOnboardingStepKey = "com.linkkey.app.currentOnboardingStep"
     }
     
     func hasFullDiscAccess() -> FullDiskAccessStatus {
-        var homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        homeDirectory.appendPathComponent("/Library/Messages/chat.db")
+        let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
+        let messagesPath = homeDirectory.appendingPathComponent("Library/Messages/chat.db").path
+        
+        let fileExists = FileManager.default.fileExists(atPath: messagesPath)
+        let fileURL = URL(fileURLWithPath: messagesPath)
+        
+        // Try to read a tiny bit of the file to verify access
+        var canRead = false
+        if let fileHandle = try? FileHandle(forReadingFrom: fileURL) {
+            if (try? fileHandle.read(upToCount: 1)) != nil {
+                canRead = true
+            }
+            try? fileHandle.close()
+        }
+        
+        NSLog("[LinkKey] Checking FDA at: \(messagesPath)")
+        NSLog("[LinkKey] File exists: \(fileExists), Can read: \(canRead)")
 
-        let fileExists = FileManager.default.fileExists(atPath: homeDirectory.path)
-        let data = try? Data(contentsOf: homeDirectory)
-        if data == nil && fileExists {
-            return .denied
-        } else if fileExists {
+        if canRead {
             return .authorized
+        } else if fileExists {
+            return .denied
         }
         
         return .unknown
@@ -80,7 +94,7 @@ class AppStateManager {
     func hasAccessibilityPermission() -> Bool {
         let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: false]
         let status = AXIsProcessTrustedWithOptions(options)
-    
+        NSLog("[LinkKey] Checking Accessibility: \(status)")
         return status
     }
 
@@ -221,6 +235,15 @@ class AppStateManager {
         }
         set(newValue) {
             UserDefaults.standard.set(newValue, forKey: Constants.googleMessagesAppInstalledKey)
+        }
+    }
+
+    var currentOnboardingStep: String? {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.currentOnboardingStepKey)
+        }
+        set(newValue) {
+            UserDefaults.standard.set(newValue, forKey: Constants.currentOnboardingStepKey)
         }
     }
 

@@ -5,11 +5,11 @@
 
 import SwiftUI
 
-enum OnboardingStep {
-    case platformSelection
-    case iMessagePermissions
-    case googleMessagesSetup
-    case featureOverview
+enum OnboardingStep: String {
+    case platformSelection = "platformSelection"
+    case iMessagePermissions = "iMessagePermissions"
+    case googleMessagesSetup = "googleMessagesSetup"
+    case featureOverview = "featureOverview"
 }
 
 struct OnboardingView: View {
@@ -111,6 +111,18 @@ struct IMessagePermissionsView: View {
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 25)
+
+            Button(action: {
+                viewModel.checkPermissions()
+            }) {
+                HStack {
+                    Image(systemName: "arrow.clockwise")
+                    Text("Refresh Status")
+                }
+            }
+            .buttonStyle(.plain)
+            .foregroundColor(.blue)
+            .padding(.bottom, 10)
 
             Spacer()
 
@@ -319,7 +331,12 @@ enum PermissionStatus {
 }
 
 class OnboardingViewModel: ObservableObject {
-    @Published var currentStep: OnboardingStep = .platformSelection
+    @Published var currentStep: OnboardingStep = .platformSelection {
+        didSet {
+            NSLog("[LinkKey] Onboarding step changed to: \(currentStep.rawValue)")
+            AppStateManager.shared.currentOnboardingStep = currentStep.rawValue
+        }
+    }
     @Published var selectedPlatform: MessagingPlatform = .iMessage
     @Published var hasAccessibility: Bool = false
     @Published var hasFullDiskAccess: Bool = false
@@ -331,11 +348,24 @@ class OnboardingViewModel: ObservableObject {
     }
 
     init() {
-        // Check if user already has a platform selected
-        if AppStateManager.shared.hasSetup {
+        // Just check initial permissions
+        checkPermissions()
+    }
+
+    func restoreState() {
+        // Restore platform
+        if AppStateManager.shared.hasSetup || AppStateManager.shared.currentOnboardingStep != nil {
             selectedPlatform = AppStateManager.shared.messagingPlatform
         }
-        checkPermissions()
+        
+        // Restore step
+        if let savedStepRawValue = AppStateManager.shared.currentOnboardingStep,
+           let savedStep = OnboardingStep(rawValue: savedStepRawValue) {
+            NSLog("[LinkKey] Restoring onboarding step: \(savedStepRawValue)")
+            self.currentStep = savedStep
+        } else {
+            NSLog("[LinkKey] No saved onboarding step found, starting at platformSelection")
+        }
     }
 
     func proceedFromPlatformSelection() {
@@ -348,6 +378,7 @@ class OnboardingViewModel: ObservableObject {
     }
 
     func startMonitoring() {
+        restoreState()
         checkPermissions()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
             self?.checkPermissions()
@@ -359,9 +390,10 @@ class OnboardingViewModel: ObservableObject {
         timer = nil
     }
 
-    private func checkPermissions() {
+    func checkPermissions() {
         hasAccessibility = AppStateManager.shared.hasAccessibilityPermission()
         hasFullDiskAccess = AppStateManager.shared.hasFullDiscAccess() == .authorized
+        NSLog("[LinkKey] Permissions checked - Access: \(hasAccessibility), FDA: \(hasFullDiskAccess)")
     }
 }
 
