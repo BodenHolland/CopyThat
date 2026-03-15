@@ -470,24 +470,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func openOnboardingWindow() {
-        print("openOnboardingWindow called")
+        NSLog("[LinkKey] openOnboardingWindow called")
         refreshActivationPolicy()
+        
         if onboardingWindow == nil {
-            print("Creating new onboarding window")
+            NSLog("[LinkKey] Creating new onboarding window")
             onboardingWindow = createOnboardingWindow()
-            // Listen for window closing to Refresh Policy
             NotificationCenter.default.addObserver(self, selector: #selector(onboardingWindowDidClose(_:)), name: NSWindow.willCloseNotification, object: onboardingWindow)
-        } else {
-            print("Using existing onboarding window")
         }
         
         onboardingWindow?.center()
+        onboardingWindow?.level = .floating // Ensure it stays on top of other windows
         onboardingWindow?.makeKeyAndOrderFront(nil)
-        print("Window ordered front. Visible: \(onboardingWindow?.isVisible ?? false)")
+        
         NSApp.activate(ignoringOtherApps: true)
+        NSLog("[LinkKey] Window ordered front. Visible: \(onboardingWindow?.isVisible ?? false)")
     }
 
     @objc func onboardingWindowDidClose(_ notification: Notification) {
+        NSLog("[LinkKey] Onboarding window closed")
+        onboardingWindow = nil // Nil it out so it can be recreated correctly
         refreshActivationPolicy()
     }
 

@@ -248,3 +248,5 @@ iOSInjectionProject/
 .LSOverride
 ._*
 
+build_release/
+*.dmg

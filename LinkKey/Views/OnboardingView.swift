@@ -156,7 +156,7 @@ struct IMessagePermissionsView: View {
 
                 Button(action: {
                     if viewModel.allPermissionsGranted {
-                        AppStateManager.shared.messagingPlatform = .iMessage
+                        AppStateManager.shared.messagingPlatform = viewModel.selectedPlatform
                         viewModel.currentStep = .featureOverview
                     } else {
                         NSApplication.shared.keyWindow?.close()
