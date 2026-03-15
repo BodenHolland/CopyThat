@@ -276,6 +276,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         window.isReleasedWhenClosed = false
         window.setFrameAutosaveName("OnboardingWindow")
         window.minSize = NSSize(width: 600, height: 500)
+        window.center()
         return window
     }
     

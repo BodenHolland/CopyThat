@@ -77,6 +77,10 @@ DerivedData/
 # NB: slash on the end, so we only remove the FOLDER, not any files that were badly named "build"
 
 build/
+build_release/
+build-output/
+build_output/
+*.dmg
 
 
 #####
