@@ -488,21 +488,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func openOnboardingWindow() {
-        NSLog("[LinkKey] openOnboardingWindow called")
-        refreshActivationPolicy()
-        
-        if onboardingWindow == nil {
-            NSLog("[LinkKey] Creating new onboarding window")
-            onboardingWindow = createOnboardingWindow()
-            NotificationCenter.default.addObserver(self, selector: #selector(onboardingWindowDidClose(_:)), name: NSWindow.willCloseNotification, object: onboardingWindow)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            NSLog("[LinkKey] openOnboardingWindow called (async)")
+            NSApp.setActivationPolicy(.regular)
+            self.refreshActivationPolicy()
+            
+            if self.onboardingWindow == nil {
+                NSLog("[LinkKey] Creating new onboarding window")
+                self.onboardingWindow = self.createOnboardingWindow()
+                NotificationCenter.default.addObserver(self, selector: #selector(self.onboardingWindowDidClose(_:)), name: NSWindow.willCloseNotification, object: self.onboardingWindow)
+            }
+            
+            self.onboardingWindow?.center()
+            self.onboardingWindow?.level = .floating
+            self.onboardingWindow?.makeKeyAndOrderFront(nil)
+            
+            NSApp.activate(ignoringOtherApps: true)
+            NSLog("[LinkKey] Window ordered front. Visible: \(self.onboardingWindow?.isVisible ?? false)")
         }
-        
-        onboardingWindow?.center()
-        onboardingWindow?.level = .floating // Ensure it stays on top of other windows
-        onboardingWindow?.makeKeyAndOrderFront(nil)
-        
-        NSApp.activate(ignoringOtherApps: true)
-        NSLog("[LinkKey] Window ordered front. Visible: \(onboardingWindow?.isVisible ?? false)")
     }
 
     @objc func onboardingWindowDidClose(_ notification: Notification) {
