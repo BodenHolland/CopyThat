@@ -9,11 +9,12 @@ APP_PATH="/Applications/LinkKey.app"
 echo "🛑 Killing any running instances of LinkKey..."
 pkill -f "LinkKey" || true
 
-echo "🧹 Resetting Accessibility permissions..."
+echo "🧹 Resetting Privacy permissions..."
 tccutil reset Accessibility $APP_BUNDLE_ID
-
-echo "🧹 Resetting Full Disk Access permissions..."
 tccutil reset SystemPolicyAllFiles $APP_BUNDLE_ID
+
+echo "🧹 Clearing App Settings (UserDefaults)..."
+defaults delete $APP_BUNDLE_ID || true
 
 echo "🚀 Relaunching LinkKey from $APP_PATH..."
 if [ -d "$APP_PATH" ]; then

@@ -62,30 +62,48 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("App Launched")
+        setupStatusBar()
         
+        let hasFDA = AppStateManager.shared.hasFullDiscAccess() == .authorized
+        let hasAccess = AppStateManager.shared.hasAccessibilityPermission()
+        
+        NSLog("[LinkKey] App Launched. hasSetup: \(AppStateManager.shared.hasSetup), FDA: \(hasFDA), Access: \(hasAccess)")
+
+        if !AppStateManager.shared.hasSetup {
+            NSLog("[LinkKey] Logic: !hasSetup -> Opening Onboarding")
+            AppStateManager.shared.shouldLaunchOnLogin = true
+            AppStateManager.shared.globalShortcutEnabled = true
+            openOnboardingWindow()
+        } else if AppStateManager.shared.messagingPlatform == .iMessage {
+            if !hasFDA || !hasAccess {
+                NSLog("[LinkKey] Logic: iMessage + Missing Permissions -> Opening Onboarding")
+                openOnboardingWindow()
+            } else {
+                NSLog("[LinkKey] Logic: iMessage + All Permissions -> Running as accessory")
+                refreshActivationPolicy()
+            }
+        } else {
+            refreshActivationPolicy()
+        }
+    }
+
+    func setupStatusBar() {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.variableLength)
         
         if let icon = NSImage(named: "TrayIcon") {
-            print("Loaded TrayIcon asset successfully")
             icon.isTemplate = true
-            icon.size = NSSize(width: 18, height: 18) // Force standard size
+            icon.size = NSSize(width: 18, height: 18)
             statusBarItem.button?.image = icon
         } else {
-            print("FAILED to load TrayIcon asset, using SF Symbol fallback")
             let fallbackIcon = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "LinkKey")
             fallbackIcon?.isTemplate = true
             statusBarItem.button?.image = fallbackIcon
         }
         
         statusBarItem.isVisible = true
-        statusBarItem.button?.title = "LinkKey" // Temporary to see if it shows up
-        print("StatusBarItem setup complete. Visible: \(statusBarItem.isVisible)")
-
-        NSApp.setActivationPolicy(.regular)
-        NSApp.activate(ignoringOtherApps: true)
-
+        statusBarItem.button?.title = "LinkKey"
+        
         if AppStateManager.shared.globalShortcutEnabled {
             setupGlobalKeyShortcut()
         }
@@ -93,30 +111,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         initMessageManager()
         setupKeyboardListener()
         setupNotifications()
+        refreshMenu()
+    }
 
-        print("Has Setup: \(AppStateManager.shared.hasSetup)")
-        print("Platform: \(AppStateManager.shared.messagingPlatform)")
-        print("FDA: \(AppStateManager.shared.hasFullDiscAccess())")
-        print("Accessibility: \(AppStateManager.shared.hasAccessibilityPermission())")
-
-        if !AppStateManager.shared.hasSetup {
-            print("Logic: !hasSetup -> Opening Onboarding")
-            AppStateManager.shared.shouldLaunchOnLogin = true
-            AppStateManager.shared.globalShortcutEnabled = true
-            openOnboardingWindow()
-        } else if AppStateManager.shared.messagingPlatform == .iMessage {
-            if AppStateManager.shared.hasFullDiscAccess() != .authorized || !AppStateManager.shared.hasAccessibilityPermission() {
-                print("Logic: iMessage + Missing Permissions -> Opening Onboarding")
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        NSLog("[LinkKey] Application reopened. flag: \(flag)")
+        // Bring the app to the front
+        NSApp.activate(ignoringOtherApps: true)
+        if !flag {
+            // If no windows are visible, open the onboarding window or show status
+            if !AppStateManager.shared.hasSetup ||
+               (AppStateManager.shared.messagingPlatform == .iMessage &&
+                (AppStateManager.shared.hasFullDiscAccess() != .authorized || !AppStateManager.shared.hasAccessibilityPermission())) {
                 openOnboardingWindow()
             } else {
-                print("Logic: iMessage + All Permissions -> NOT Opening Onboarding")
-                refreshActivationPolicy()
+                // If setup, just show the status bar menu
+                statusBarItem.button?.performClick(nil)
             }
-        } else {
-            refreshActivationPolicy()
         }
-        
-        refreshMenu()
+        return true
     }
 
     func setupNotifications() {
