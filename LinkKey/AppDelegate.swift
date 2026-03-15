@@ -297,6 +297,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             action: #selector(AppDelegate.onPressSetup),
             keyEquivalent: "")
 
+        statusBarMenu.addItem(
+            withTitle: "🚀 Send Test Notification",
+            action: #selector(AppDelegate.onPressTestNotification),
+            keyEquivalent: "")
+
         statusBarMenu.addItem(NSMenuItem.separator())
 
         statusBarMenu.addItem(withTitle: "Recent", action: nil, keyEquivalent: "")
@@ -610,6 +615,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     @objc func onPressMarkAsRead() {
         AppStateManager.shared.markAsReadEnabled = !AppStateManager.shared.markAsReadEnabled
         refreshMenu()
+    }
+
+    @objc func onPressTestNotification() {
+        let testMessage = Message(rowId: 0, guid: "test-\(UUID().uuidString)", text: "Your LinkKey test code is 123456", handle: "LinkKey Test", group: nil, fromMe: false)
+        let parsed = ParsedOTP(service: "LinkKey Test", code: "123456")
+        showOverlayForMessage((testMessage, parsed))
     }
 
     @objc func onPressDebugLogging() {
