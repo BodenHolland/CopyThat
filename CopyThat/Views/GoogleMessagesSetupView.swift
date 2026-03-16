@@ -1,6 +1,6 @@
 //
 //  GoogleMessagesSetupView.swift
-//  LinkKey
+//  CopyThat
 //
 
 import SwiftUI
@@ -163,7 +163,7 @@ struct GoogleMessagesSetupView: View {
             SetupStepRow(
                 number: 1,
                 title: "Install Google Messages",
-                description: "We'll install a LinkKey-compatible version to your Applications folder"
+                description: "We'll install a CopyThat-compatible version to your Applications folder"
             )
 
             SetupStepRow(
@@ -234,7 +234,7 @@ struct GoogleMessagesSetupView: View {
                 Text("Next Steps:")
                     .font(.system(size: 14, weight: .medium))
 
-                Text("1. The Google Messages app should now be open\n2. Scan the QR code with your Android phone\n3. LinkKey will automatically detect verification codes")
+                Text("1. The Google Messages app should now be open\n2. Scan the QR code with your Android phone\n3. CopyThat will automatically detect verification codes")
                     .font(.system(size: 13))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

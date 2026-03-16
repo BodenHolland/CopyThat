@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4F5CA9B2817688800A39E6D"
-               BuildableName = "LinkKey.app"
-               BlueprintName = "LinkKey"
-               ReferencedContainer = "container:LinkKey.xcodeproj">
+               BuildableName = "CopyThat.app"
+               BlueprintName = "CopyThat"
+               ReferencedContainer = "container:CopyThat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4123A7B2826EF3B002C3C42"
-               BuildableName = "LinkKeyTests.xctest"
-               BlueprintName = "LinkKeyTests"
-               ReferencedContainer = "container:LinkKey.xcodeproj">
+               BuildableName = "CopyThatTests.xctest"
+               BlueprintName = "CopyThatTests"
+               ReferencedContainer = "container:CopyThat.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4F5CA9B2817688800A39E6D"
-            BuildableName = "LinkKey.app"
-            BlueprintName = "LinkKey"
-            ReferencedContainer = "container:LinkKey.xcodeproj">
+            BuildableName = "CopyThat.app"
+            BlueprintName = "CopyThat"
+            ReferencedContainer = "container:CopyThat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4F5CA9B2817688800A39E6D"
-            BuildableName = "LinkKey.app"
-            BlueprintName = "LinkKey"
-            ReferencedContainer = "container:LinkKey.xcodeproj">
+            BuildableName = "CopyThat.app"
+            BlueprintName = "CopyThat"
+            ReferencedContainer = "container:CopyThat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

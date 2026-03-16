@@ -1,6 +1,6 @@
 //
 //  GoogleMessagesManager.swift
-//  LinkKey
+//  CopyThat
 //
 //  Monitors for notifications from Google Messages Pake app via HTTP server
 //
@@ -13,7 +13,7 @@ class GoogleMessagesManager: ObservableObject {
 
     private var processedIds: Set<String> = []
     private var otpParser: OTPParser
-    private let cacheKey = "com.linkkey.app.googleMessagesCache"
+    private let cacheKey = "com.copythat.app.googleMessagesCache"
     private let maxCachedMessages = 10
 
     init(withOTPParser otpParser: OTPParser) {

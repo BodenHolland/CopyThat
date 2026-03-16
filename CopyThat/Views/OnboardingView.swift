@@ -1,6 +1,6 @@
 //
 //  OnboardingView.swift
-//  LinkKey
+//  CopyThat
 //
 
 import SwiftUI
@@ -68,7 +68,7 @@ struct IMessagePermissionsView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 60)
 
-                Text("Welcome to LinkKey")
+                Text("Welcome to CopyThat")
                     .font(.system(size: 24, weight: .bold))
 
                 Text("Automatically copy verification codes from iMessage")
@@ -187,7 +187,7 @@ struct FeatureOverviewView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 60)
 
-                Text("How LinkKey Works")
+                Text("How CopyThat Works")
                     .font(.system(size: 24, weight: .bold))
             }
             .padding(.top, 30)
@@ -201,7 +201,7 @@ struct FeatureOverviewView: View {
                     FeatureRow(
                         icon: "doc.on.clipboard.fill",
                         title: "Auto-Copy & Paste",
-                        description: "LinkKey automatically extracts codes and copies them to your clipboard. If Accessibility is enabled, it even pastes them for you!"
+                        description: "CopyThat automatically extracts codes and copies them to your clipboard. If Accessibility is enabled, it even pastes them for you!"
                     )
 
                     FeatureRow(
@@ -219,7 +219,7 @@ struct FeatureOverviewView: View {
                     FeatureRow(
                         icon: "keyboard",
                         title: "Keyboard Shortcuts",
-                        description: "Press ⌥⌘R to resync if iMessage misses a code. Use ⌘V to paste normally (LinkKey restores your original clipboard after 5 seconds)."
+                        description: "Press ⌥⌘R to resync if iMessage misses a code. Use ⌘V to paste normally (CopyThat restores your original clipboard after 5 seconds)."
                     )
                 }
                 .padding(.horizontal, 40)
@@ -333,7 +333,7 @@ enum PermissionStatus {
 class OnboardingViewModel: ObservableObject {
     @Published var currentStep: OnboardingStep = .platformSelection {
         didSet {
-            NSLog("[LinkKey] Onboarding step changed to: \(currentStep.rawValue)")
+            NSLog("[CopyThat] Onboarding step changed to: \(currentStep.rawValue)")
             AppStateManager.shared.currentOnboardingStep = currentStep.rawValue
         }
     }
@@ -361,10 +361,10 @@ class OnboardingViewModel: ObservableObject {
         // Restore step
         if let savedStepRawValue = AppStateManager.shared.currentOnboardingStep,
            let savedStep = OnboardingStep(rawValue: savedStepRawValue) {
-            NSLog("[LinkKey] Restoring onboarding step: \(savedStepRawValue)")
+            NSLog("[CopyThat] Restoring onboarding step: \(savedStepRawValue)")
             self.currentStep = savedStep
         } else {
-            NSLog("[LinkKey] No saved onboarding step found, starting at platformSelection")
+            NSLog("[CopyThat] No saved onboarding step found, starting at platformSelection")
         }
     }
 
@@ -393,7 +393,7 @@ class OnboardingViewModel: ObservableObject {
     func checkPermissions() {
         hasAccessibility = AppStateManager.shared.hasAccessibilityPermission()
         hasFullDiskAccess = AppStateManager.shared.hasFullDiscAccess() == .authorized
-        NSLog("[LinkKey] Permissions checked - Access: \(hasAccessibility), FDA: \(hasFullDiskAccess)")
+        NSLog("[CopyThat] Permissions checked - Access: \(hasAccessibility), FDA: \(hasFullDiskAccess)")
     }
 }
 

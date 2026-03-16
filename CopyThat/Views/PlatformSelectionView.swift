@@ -1,6 +1,6 @@
 //
 //  PlatformSelectionView.swift
-//  LinkKey
+//  CopyThat
 //
 
 import SwiftUI
@@ -22,7 +22,7 @@ struct PlatformSelectionView: View {
                 Text("Choose Your Messaging Platform")
                     .font(.system(size: 24, weight: .bold))
 
-                Text("LinkKey can monitor one messaging platform at a time for verification codes.")
+                Text("CopyThat can monitor one messaging platform at a time for verification codes.")
                     .font(.system(size: 13))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  LinkKey
+//  CopyThat
 //
 //  Created by Drew Pomerleau on 4/25/22.
 //

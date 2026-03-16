@@ -15,7 +15,7 @@
 		0FB533F92EA81F1E00BD67DF /* DebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB533F82EA81F1E00BD67DF /* DebugLogger.swift */; };
 		6547376E29B8973800523B18 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547376D29B8973800523B18 /* Permission.swift */; };
 		D4123A7628261377002C3C42 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4123A7528261377002C3C42 /* UIConstants.swift */; };
-		D4123A7F2826EF3B002C3C42 /* LinkKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4123A7E2826EF3B002C3C42 /* LinkKeyTests.swift */; };
+		D4123A7F2826EF3B002C3C42 /* CopyThatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4123A7E2826EF3B002C3C42 /* CopyThatTests.swift */; };
 		D41FABD828177D7F00B0F829 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41FABD728177D7F00B0F829 /* WebKit.framework */; };
 		D4331327281F5D3500AC5343 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D4331326281F5D3500AC5343 /* SQLite */; };
 		D433132F281F630400AC5343 /* AutoLauncherAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D433132E281F630400AC5343 /* AutoLauncherAppDelegate.swift */; };
@@ -43,7 +43,7 @@
 			containerPortal = D4F5CA942817688800A39E6D /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D4F5CA9B2817688800A39E6D;
-			remoteInfo = LinkKey;
+			remoteInfo = CopyThat;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,8 +70,8 @@
 		0FB533F82EA81F1E00BD67DF /* DebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogger.swift; sourceTree = "<group>"; };
 		6547376D29B8973800523B18 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		D4123A7528261377002C3C42 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
-		D4123A7C2826EF3B002C3C42 /* LinkKeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkKeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4123A7E2826EF3B002C3C42 /* LinkKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkKeyTests.swift; sourceTree = "<group>"; };
+		D4123A7C2826EF3B002C3C42 /* CopyThatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CopyThatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4123A7E2826EF3B002C3C42 /* CopyThatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyThatTests.swift; sourceTree = "<group>"; };
 		D41FABD728177D7F00B0F829 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		D41FABE428178CDB00B0F829 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D433132C281F630400AC5343 /* AutoLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,10 +83,10 @@
 		D479A3E12821EE2600915AAA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D4AF833C2825FEE70034A7BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D4AF833E2826018D0034A7BE /* Main.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Main.xib; sourceTree = "<group>"; };
-		D4F5CA9C2817688800A39E6D /* LinkKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F5CA9C2817688800A39E6D /* CopyThat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyThat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F5CA9F2817688800A39E6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4F5CAA32817688900A39E6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D4F5CAA82817688900A39E6D /* LinkKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LinkKey.entitlements; sourceTree = "<group>"; };
+		D4F5CAA82817688900A39E6D /* CopyThat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CopyThat.entitlements; sourceTree = "<group>"; };
 		D4F5CAAF281768B000A39E6D /* OTPParserContants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPParserContants.swift; sourceTree = "<group>"; };
 		D4F5CAB0281768B000A39E6D /* CustomOTPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOTPParser.swift; sourceTree = "<group>"; };
 		D4F5CAB1281768B000A39E6D /* OTPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPParser.swift; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0F296FA82EF8BAB200D82E5A /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
-		0F296FB02EF8CB4B00D82E5A /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = Resources; path = LinkKey/Resources; sourceTree = "<group>"; };
-		0FCFDDCB2EA0330500A5181B /* OTPKeywords */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = OTPKeywords; path = LinkKey/OTPKeywords; sourceTree = "<group>"; };
+		0F296FB02EF8CB4B00D82E5A /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = Resources; path = CopyThat/Resources; sourceTree = "<group>"; };
+		0FCFDDCB2EA0330500A5181B /* OTPKeywords */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); name = OTPKeywords; path = CopyThat/OTPKeywords; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,12 +131,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D4123A7D2826EF3B002C3C42 /* LinkKeyTests */ = {
+		D4123A7D2826EF3B002C3C42 /* CopyThatTests */ = {
 			isa = PBXGroup;
 			children = (
-				D4123A7E2826EF3B002C3C42 /* LinkKeyTests.swift */,
+				D4123A7E2826EF3B002C3C42 /* CopyThatTests.swift */,
 			);
-			path = LinkKeyTests;
+			path = CopyThatTests;
 			sourceTree = "<group>";
 		};
 		D41FABD628177D7F00B0F829 /* Frameworks */ = {
@@ -175,9 +175,9 @@
 			children = (
 				0F296FB02EF8CB4B00D82E5A /* Resources */,
 				0FCFDDCB2EA0330500A5181B /* OTPKeywords */,
-				D4F5CA9E2817688800A39E6D /* LinkKey */,
+				D4F5CA9E2817688800A39E6D /* CopyThat */,
 				D433132D281F630400AC5343 /* AutoLauncher */,
-				D4123A7D2826EF3B002C3C42 /* LinkKeyTests */,
+				D4123A7D2826EF3B002C3C42 /* CopyThatTests */,
 				D4F5CA9D2817688800A39E6D /* Products */,
 				D41FABD628177D7F00B0F829 /* Frameworks */,
 			);
@@ -186,14 +186,14 @@
 		D4F5CA9D2817688800A39E6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4F5CA9C2817688800A39E6D /* LinkKey.app */,
+				D4F5CA9C2817688800A39E6D /* CopyThat.app */,
 				D433132C281F630400AC5343 /* AutoLauncher.app */,
-				D4123A7C2826EF3B002C3C42 /* LinkKeyTests.xctest */,
+				D4123A7C2826EF3B002C3C42 /* CopyThatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D4F5CA9E2817688800A39E6D /* LinkKey */ = {
+		D4F5CA9E2817688800A39E6D /* CopyThat */ = {
 			isa = PBXGroup;
 			children = (
 				0F296FA82EF8BAB200D82E5A /* Services */,
@@ -205,11 +205,11 @@
 				D4F5CA9F2817688800A39E6D /* AppDelegate.swift */,
 				6547376D29B8973800523B18 /* Permission.swift */,
 				D4F5CAA32817688900A39E6D /* Assets.xcassets */,
-				D4F5CAA82817688900A39E6D /* LinkKey.entitlements */,
+				D4F5CAA82817688900A39E6D /* CopyThat.entitlements */,
 				D41FABE428178CDB00B0F829 /* main.swift */,
 				D4123A7528261377002C3C42 /* UIConstants.swift */,
 			);
-			path = LinkKey;
+			path = CopyThat;
 			sourceTree = "<group>";
 		};
 		D4F5CAAE281768A100A39E6D /* OTPParser */ = {
@@ -247,9 +247,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D4123A7B2826EF3B002C3C42 /* LinkKeyTests */ = {
+		D4123A7B2826EF3B002C3C42 /* CopyThatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4123A822826EF3B002C3C42 /* Build configuration list for PBXNativeTarget "LinkKeyTests" */;
+			buildConfigurationList = D4123A822826EF3B002C3C42 /* Build configuration list for PBXNativeTarget "CopyThatTests" */;
 			buildPhases = (
 				D4123A782826EF3B002C3C42 /* Sources */,
 				D4123A792826EF3B002C3C42 /* Frameworks */,
@@ -260,9 +260,9 @@
 			dependencies = (
 				0F6D3C712BA8C51B00FCC40A /* PBXTargetDependency */,
 			);
-			name = LinkKeyTests;
-			productName = LinkKeyTests;
-			productReference = D4123A7C2826EF3B002C3C42 /* LinkKeyTests.xctest */;
+			name = CopyThatTests;
+			productName = CopyThatTests;
+			productReference = D4123A7C2826EF3B002C3C42 /* CopyThatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D433132B281F630400AC5343 /* AutoLauncher */ = {
@@ -282,9 +282,9 @@
 			productReference = D433132C281F630400AC5343 /* AutoLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D4F5CA9B2817688800A39E6D /* LinkKey */ = {
+		D4F5CA9B2817688800A39E6D /* CopyThat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4F5CAAB2817688900A39E6D /* Build configuration list for PBXNativeTarget "LinkKey" */;
+			buildConfigurationList = D4F5CAAB2817688900A39E6D /* Build configuration list for PBXNativeTarget "CopyThat" */;
 			buildPhases = (
 				D4F5CA982817688800A39E6D /* Sources */,
 				D4F5CA992817688800A39E6D /* Frameworks */,
@@ -301,13 +301,13 @@
 				0F296FB02EF8CB4B00D82E5A /* Resources */,
 				0FCFDDCB2EA0330500A5181B /* OTPKeywords */,
 			);
-			name = LinkKey;
+			name = CopyThat;
 			packageProductDependencies = (
 				D4331326281F5D3500AC5343 /* SQLite */,
 				D4331343281F6B6700AC5343 /* HotKey */,
 			);
-			productName = LinkKey;
-			productReference = D4F5CA9C2817688800A39E6D /* LinkKey.app */;
+			productName = CopyThat;
+			productReference = D4F5CA9C2817688800A39E6D /* CopyThat.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -332,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D4F5CA972817688800A39E6D /* Build configuration list for PBXProject "LinkKey" */;
+			buildConfigurationList = D4F5CA972817688800A39E6D /* Build configuration list for PBXProject "CopyThat" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -349,9 +349,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D4F5CA9B2817688800A39E6D /* LinkKey */,
+				D4F5CA9B2817688800A39E6D /* CopyThat */,
 				D433132B281F630400AC5343 /* AutoLauncher */,
-				D4123A7B2826EF3B002C3C42 /* LinkKeyTests */,
+				D4123A7B2826EF3B002C3C42 /* CopyThatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -409,7 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4123A7F2826EF3B002C3C42 /* LinkKeyTests.swift in Sources */,
+				D4123A7F2826EF3B002C3C42 /* CopyThatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,7 +452,7 @@
 /* Begin PBXTargetDependency section */
 		0F6D3C712BA8C51B00FCC40A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D4F5CA9B2817688800A39E6D /* LinkKey */;
+			target = D4F5CA9B2817688800A39E6D /* CopyThat */;
 			targetProxy = 0F6D3C702BA8C51B00FCC40A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -461,7 +461,7 @@
 		D4123A832826EF3B002C3C42 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/LinkKey.app/Contents/MacOS/LinkKey";
+				BUNDLE_LOADER = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/CopyThat.app/Contents/MacOS/CopyThat";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -470,12 +470,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden.LinkKeyTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden.CopyThatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinkKey.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LinkKey";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyThat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CopyThat";
 			};
 			name = Debug;
 		};
@@ -491,12 +491,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden.LinkKeyTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden.CopyThatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinkKey.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LinkKey";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyThat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CopyThat";
 			};
 			name = Release;
 		};
@@ -526,7 +526,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden.AutoLauncher;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden.AutoLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -561,7 +561,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden.AutoLauncher;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden.AutoLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -627,7 +627,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = LinkKey;
+				PRODUCT_NAME = CopyThat;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -685,7 +685,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = LinkKey;
+				PRODUCT_NAME = CopyThat;
 				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -700,7 +700,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = LinkKey/LinkKey.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CopyThat/CopyThat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -710,8 +710,8 @@
 				DEVELOPMENT_TEAM = Q6573455NZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LinkKey/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LinkKey;
+				INFOPLIST_FILE = CopyThat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CopyThat;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -721,8 +721,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden;
-				PRODUCT_NAME = LinkKey;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden;
+				PRODUCT_NAME = CopyThat;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -736,7 +736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_ENTITLEMENTS = LinkKey/LinkKey.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CopyThat/CopyThat.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -746,8 +746,8 @@
 				DEVELOPMENT_TEAM = Q6573455NZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LinkKey/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LinkKey;
+				INFOPLIST_FILE = CopyThat/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CopyThat;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -757,8 +757,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.linkkey.app.boden;
-				PRODUCT_NAME = LinkKey;
+				PRODUCT_BUNDLE_IDENTIFIER = com.copythat.app.boden;
+				PRODUCT_NAME = CopyThat;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -768,7 +768,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D4123A822826EF3B002C3C42 /* Build configuration list for PBXNativeTarget "LinkKeyTests" */ = {
+		D4123A822826EF3B002C3C42 /* Build configuration list for PBXNativeTarget "CopyThatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4123A832826EF3B002C3C42 /* Debug */,
@@ -786,7 +786,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4F5CA972817688800A39E6D /* Build configuration list for PBXProject "LinkKey" */ = {
+		D4F5CA972817688800A39E6D /* Build configuration list for PBXProject "CopyThat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4F5CAA92817688900A39E6D /* Debug */,
@@ -795,7 +795,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4F5CAAB2817688900A39E6D /* Build configuration list for PBXNativeTarget "LinkKey" */ = {
+		D4F5CAAB2817688900A39E6D /* Build configuration list for PBXNativeTarget "CopyThat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4F5CAAC2817688900A39E6D /* Debug */,

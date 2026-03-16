@@ -1,6 +1,6 @@
 //
 //  NotificationServer.swift
-//  LinkKey
+//  CopyThat
 //
 //  WebSocket server to receive notifications from Google Messages Pake app
 //  Uses WSS (WebSocket Secure) because HTTPS pages block insecure connections to localhost
@@ -156,7 +156,7 @@ class NotificationServer {
             sendCORSResponse(connection: connection)
         } else if method == "GET" {
             // Could be WebSocket upgrade or regular GET
-            sendResponse(connection: connection, statusCode: 200, body: "LinkKey Notification Server")
+            sendResponse(connection: connection, statusCode: 200, body: "CopyThat Notification Server")
         } else {
             sendResponse(connection: connection, statusCode: 404, body: "Not found")
         }
@@ -323,8 +323,8 @@ class NotificationServer {
     // MARK: - TLS Setup
 
     private func createTLSParameters() -> NWParameters? {
-        let certPath = NSHomeDirectory() + "/.linkkey/server.crt"
-        let keyPath = NSHomeDirectory() + "/.linkkey/server.key"
+        let certPath = NSHomeDirectory() + "/.copythat/server.crt"
+        let keyPath = NSHomeDirectory() + "/.copythat/server.key"
 
         guard FileManager.default.fileExists(atPath: certPath),
               FileManager.default.fileExists(atPath: keyPath) else {
@@ -349,9 +349,9 @@ class NotificationServer {
 
     private func loadIdentity(certPath: String, keyPath: String) -> sec_identity_t? {
         // Try P12 file first (simpler, no keychain needed)
-        let p12Path = NSHomeDirectory() + "/.linkkey/server.p12"
+        let p12Path = NSHomeDirectory() + "/.copythat/server.p12"
         if let p12Data = FileManager.default.contents(atPath: p12Path) {
-            let options: [String: Any] = [kSecImportExportPassphrase as String: "linkkey"]
+            let options: [String: Any] = [kSecImportExportPassphrase as String: "copythat"]
             var items: CFArray?
             let status = SecPKCS12Import(p12Data as CFData, options as CFDictionary, &items)
 

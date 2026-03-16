@@ -1,6 +1,6 @@
 //
 //  DebugLogger.swift
-//  LinkKey
+//  CopyThat
 //
 //  Debug logging utility for iMessage database operations
 //
@@ -12,7 +12,7 @@ class DebugLogger {
 
     private var logFileURL: URL?
     private let dateFormatter: DateFormatter
-    private let queue = DispatchQueue(label: "com.linkkey.app.debugLogger", qos: .utility)
+    private let queue = DispatchQueue(label: "com.copythat.app.debugLogger", qos: .utility)
 
     private init() {
         dateFormatter = DateFormatter()
@@ -20,7 +20,7 @@ class DebugLogger {
 
         // Set up log file in Documents folder
         if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            logFileURL = documentsPath.appendingPathComponent("LinkKey_Debug.log")
+            logFileURL = documentsPath.appendingPathComponent("CopyThat_Debug.log")
         }
     }
 
@@ -46,7 +46,7 @@ class DebugLogger {
 
             // Create file if it doesn't exist
             if !FileManager.default.fileExists(atPath: logFileURL.path) {
-                let header = "LinkKey Debug Log\nStarted: \(timestamp)\n" + String(repeating: "=", count: 80) + "\n"
+                let header = "CopyThat Debug Log\nStarted: \(timestamp)\n" + String(repeating: "=", count: 80) + "\n"
                 try? header.write(to: logFileURL, atomically: true, encoding: .utf8)
             }
 
@@ -106,7 +106,7 @@ class DebugLogger {
             try? FileManager.default.removeItem(at: logFileURL)
 
             let timestamp = self.dateFormatter.string(from: Date())
-            let header = "LinkKey Debug Log\nStarted: \(timestamp)\n" + String(repeating: "=", count: 80) + "\n"
+            let header = "CopyThat Debug Log\nStarted: \(timestamp)\n" + String(repeating: "=", count: 80) + "\n"
             try? header.write(to: logFileURL, atomically: true, encoding: .utf8)
         }
     }

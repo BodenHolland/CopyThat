@@ -1,6 +1,6 @@
 //
 //  GoogleMessagesSetupService.swift
-//  LinkKey
+//  CopyThat
 //
 
 import Foundation
@@ -248,7 +248,7 @@ class GoogleMessagesSetupService: ObservableObject {
     // MARK: - TLS Certificate Setup
 
     private func generateTLSCertificate() async throws {
-        let certDir = NSHomeDirectory() + "/.linkkey"
+        let certDir = NSHomeDirectory() + "/.copythat"
         let p12Path = certDir + "/server.p12"
 
         // Skip if already exists

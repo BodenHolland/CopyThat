@@ -1,6 +1,6 @@
 //
 //  AppStateManager.swift
-//  LinkKey
+//  CopyThat
 //
 //  Created by Drew Pomerleau on 4/25/22.
 //
@@ -46,21 +46,21 @@ class AppStateManager {
     
     private struct Constants {
         // Helper Application Bundle Identifier
-        static let autoLauncherBundleID = "com.linkkey.app.boden.AutoLauncher"
+        static let autoLauncherBundleID = "com.copythat.app.boden.AutoLauncher"
         
-        static let autoLauncherPrefKey = "com.linkkey.app.shouldAutoLaunch"
-        static let globalShortcutEnabledKey = "com.linkkey.app.globalShortcutEnabled"
-        static let notificationPositionKey = "com.linkkey.app.notificationPosition"
-        static let restoreContentsDelayTimeKey = "com.linkkey.app.restoreContentsDelayTime"
-        static let hasSetupKey = "com.linkkey.app.hasSetup"
-        static let autoPasteEnabledKey = "com.linkkey.app.autoPasteEnabled"
-        static let showNotificationOverlayKey = "com.linkkey.app.showNotificationOverlay"
-        static let useNativeNotificationsKey = "com.linkkey.app.useNativeNotifications"
-        static let markAsReadEnabledKey = "com.linkkey.app.markAsReadEnabled"
-        static let debugLoggingEnabledKey = "com.linkkey.app.debugLoggingEnabled"
-        static let messagingPlatformKey = "com.linkkey.app.messagingPlatform"
-        static let googleMessagesAppInstalledKey = "com.linkkey.app.googleMessagesAppInstalled"
-        static let currentOnboardingStepKey = "com.linkkey.app.currentOnboardingStep"
+        static let autoLauncherPrefKey = "com.copythat.app.shouldAutoLaunch"
+        static let globalShortcutEnabledKey = "com.copythat.app.globalShortcutEnabled"
+        static let notificationPositionKey = "com.copythat.app.notificationPosition"
+        static let restoreContentsDelayTimeKey = "com.copythat.app.restoreContentsDelayTime"
+        static let hasSetupKey = "com.copythat.app.hasSetup"
+        static let autoPasteEnabledKey = "com.copythat.app.autoPasteEnabled"
+        static let showNotificationOverlayKey = "com.copythat.app.showNotificationOverlay"
+        static let useNativeNotificationsKey = "com.copythat.app.useNativeNotifications"
+        static let markAsReadEnabledKey = "com.copythat.app.markAsReadEnabled"
+        static let debugLoggingEnabledKey = "com.copythat.app.debugLoggingEnabled"
+        static let messagingPlatformKey = "com.copythat.app.messagingPlatform"
+        static let googleMessagesAppInstalledKey = "com.copythat.app.googleMessagesAppInstalled"
+        static let currentOnboardingStepKey = "com.copythat.app.currentOnboardingStep"
     }
     
     func hasFullDiscAccess() -> FullDiskAccessStatus {
@@ -79,8 +79,8 @@ class AppStateManager {
             try? fileHandle.close()
         }
         
-        NSLog("[LinkKey] Checking FDA at: \(messagesPath)")
-        NSLog("[LinkKey] File exists: \(fileExists), Can read: \(canRead)")
+        NSLog("[CopyThat] Checking FDA at: \(messagesPath)")
+        NSLog("[CopyThat] File exists: \(fileExists), Can read: \(canRead)")
 
         if canRead {
             return .authorized
@@ -94,7 +94,7 @@ class AppStateManager {
     func hasAccessibilityPermission() -> Bool {
         let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: false]
         let status = AXIsProcessTrustedWithOptions(options)
-        NSLog("[LinkKey] Checking Accessibility: \(status)")
+        NSLog("[CopyThat] Checking Accessibility: \(status)")
         return status
     }
 

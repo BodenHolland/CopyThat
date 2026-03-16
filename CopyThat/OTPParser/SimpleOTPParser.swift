@@ -1,6 +1,6 @@
 //
 //  SimpleOTPParser.swift
-//  LinkKey
+//  CopyThat
 //
 //  Simplified OTP extraction that uses keywords and heuristics instead of strict regex
 //
@@ -31,7 +31,7 @@ class SimpleOTPParser: OTPParser {
     }
 
     // GitHub repository URL for language files
-    private static let githubBaseURL = "https://raw.githubusercontent.com/SoFriendly/linkkey/main/LinkKey/OTPKeywords"
+    private static let githubBaseURL = "https://raw.githubusercontent.com/BodenHolland/CopyThat/main/CopyThat/OTPKeywords"
 
     // Set to true to skip GitHub updates and use only bundled files (for testing local changes)
     private static let skipGitHubUpdate = true

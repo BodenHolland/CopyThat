@@ -67,21 +67,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         let hasFDA = AppStateManager.shared.hasFullDiscAccess() == .authorized
         let hasAccess = AppStateManager.shared.hasAccessibilityPermission()
         
-        NSLog("[LinkKey] App Launched. hasSetup: \(AppStateManager.shared.hasSetup), FDA: \(hasFDA), Access: \(hasAccess)")
+        NSLog("[CopyThat] App Launched. hasSetup: \(AppStateManager.shared.hasSetup), FDA: \(hasFDA), Access: \(hasAccess)")
 
         if !AppStateManager.shared.hasSetup {
-            NSLog("[LinkKey] Logic: !hasSetup -> Opening Onboarding")
+            NSLog("[CopyThat] Logic: !hasSetup -> Opening Onboarding")
             NSApp.setActivationPolicy(.regular) // MUST set this before showing window
             AppStateManager.shared.shouldLaunchOnLogin = true
             AppStateManager.shared.globalShortcutEnabled = true
             openOnboardingWindow()
         } else if AppStateManager.shared.messagingPlatform == .iMessage {
             if !hasFDA || !hasAccess {
-                NSLog("[LinkKey] Logic: iMessage + Missing Permissions -> Opening Onboarding")
+                NSLog("[CopyThat] Logic: iMessage + Missing Permissions -> Opening Onboarding")
                 NSApp.setActivationPolicy(.regular) // MUST set this before showing window
                 openOnboardingWindow()
             } else {
-                NSLog("[LinkKey] Logic: iMessage + All Permissions -> Running as accessory")
+                NSLog("[CopyThat] Logic: iMessage + All Permissions -> Running as accessory")
                 refreshActivationPolicy()
             }
         } else {
@@ -100,13 +100,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             icon.size = NSSize(width: 18, height: 18)
             statusBarItem.button?.image = icon
         } else {
-            let fallbackIcon = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "LinkKey")
+            let fallbackIcon = NSImage(systemSymbolName: "key.fill", accessibilityDescription: "CopyThat")
             fallbackIcon?.isTemplate = true
             statusBarItem.button?.image = fallbackIcon
         }
         
         statusBarItem.isVisible = true
-        statusBarItem.button?.title = "LinkKey"
+        statusBarItem.button?.title = "CopyThat"
         
         if AppStateManager.shared.globalShortcutEnabled {
             setupGlobalKeyShortcut()
@@ -119,7 +119,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        NSLog("[LinkKey] Application reopened. flag: \(flag)")
+        NSLog("[CopyThat] Application reopened. flag: \(flag)")
         // Bring the app to the front
         NSApp.activate(ignoringOtherApps: true)
         if !flag {
@@ -271,7 +271,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             backing: .buffered,
             defer: false
         )
-        window.title = "Setup LinkKey"
+        window.title = "Setup CopyThat"
         window.contentView = NSHostingView(rootView: OnboardingView())
         window.isReleasedWhenClosed = false
         window.setFrameAutosaveName("OnboardingWindow")
@@ -287,7 +287,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         let statusText: String
         switch AppStateManager.shared.messagingPlatform {
         case .iMessage:
-            statusText = AppStateManager.shared.hasFullDiscAccess() == .authorized ? "🟢 Connected to iMessage" : "⚠️ Setup LinkKey"
+            statusText = AppStateManager.shared.hasFullDiscAccess() == .authorized ? "🟢 Connected to iMessage" : "⚠️ Setup CopyThat"
         case .googleMessages:
             statusText = AppStateManager.shared.isGoogleMessagesAppInstalled() ? "🟢 Connected to Google Messages" : "⚠️ Setup Google Messages"
         }
@@ -317,7 +317,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         // Only show Resync for iMessage (Google Messages doesn't have a database to resync from)
         if AppStateManager.shared.messagingPlatform == .iMessage {
             let resyncItem = NSMenuItem(title: "Resync", action: #selector(AppDelegate.resync), keyEquivalent: "")
-            resyncItem.toolTip = "Sometimes iMessage likes to sleep on the job. If LinkKey ever misses a message, use this option to sync recent messages and copy the latest code to your clipboard"
+            resyncItem.toolTip = "Sometimes iMessage likes to sleep on the job. If CopyThat ever misses a message, use this option to sync recent messages and copy the latest code to your clipboard"
             statusBarMenu.addItem(resyncItem)
         }
         
@@ -353,7 +353,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
 
         let keyboardShortCutItem = NSMenuItem(title: "Keyboard Shortcuts", action: #selector(AppDelegate.onPressKeyboardShortcuts), keyEquivalent: "")
-        keyboardShortCutItem.toolTip = "Disable keyboard shortcuts if LinkKey uses the same keyboard shortcuts as another app"
+        keyboardShortCutItem.toolTip = "Disable keyboard shortcuts if CopyThat uses the same keyboard shortcuts as another app"
         keyboardShortCutItem.state = AppStateManager.shared.globalShortcutEnabled ? .on : .off
         settingsMenu.addItem(keyboardShortCutItem)
 
@@ -383,7 +383,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
         
         let restoreContentsItem = NSMenuItem(title: "Restore Clipboard Contents", action: #selector(AppDelegate.onPressRestoreClipboardContents), keyEquivalent: "")
-        restoreContentsItem.toolTip = "Disable restore clipboard contents if you don't want LinkKey to restore your clipboard to what it was before receiving a code"
+        restoreContentsItem.toolTip = "Disable restore clipboard contents if you don't want CopyThat to restore your clipboard to what it was before receiving a code"
         restoreContentsItem.state = AppStateManager.shared.restoreContentsEnabled ? .on : .off
         restoreContentsItem.submenu = restoreContentsMenu
         settingsMenu.addItem(restoreContentsItem)
@@ -407,7 +407,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         settingsMenu.addItem(NSMenuItem.separator())
 
         let debugLoggingItem = NSMenuItem(title: "Debug Logging", action: #selector(AppDelegate.onPressDebugLogging), keyEquivalent: "")
-        debugLoggingItem.toolTip = "Enable debug logging to troubleshoot iMessage database issues. Logs are saved to ~/Documents/LinkKey_Debug.log"
+        debugLoggingItem.toolTip = "Enable debug logging to troubleshoot iMessage database issues. Logs are saved to ~/Documents/CopyThat_Debug.log"
         debugLoggingItem.state = AppStateManager.shared.debugLoggingEnabled ? .on : .off
         settingsMenu.addItem(debugLoggingItem)
 
@@ -472,7 +472,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         #endif
 
         statusBarMenu.addItem(
-            withTitle: "Quit LinkKey",
+            withTitle: "Quit CopyThat",
             action: #selector(AppDelegate.quit),
             keyEquivalent: "")
         return statusBarMenu
@@ -495,12 +495,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     func openOnboardingWindow() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            NSLog("[LinkKey] openOnboardingWindow called (async)")
+            NSLog("[CopyThat] openOnboardingWindow called (async)")
             NSApp.setActivationPolicy(.regular)
             self.refreshActivationPolicy()
             
             if self.onboardingWindow == nil {
-                NSLog("[LinkKey] Creating new onboarding window")
+                NSLog("[CopyThat] Creating new onboarding window")
                 self.onboardingWindow = self.createOnboardingWindow()
                 NotificationCenter.default.addObserver(self, selector: #selector(self.onboardingWindowDidClose(_:)), name: NSWindow.willCloseNotification, object: self.onboardingWindow)
             }
@@ -510,12 +510,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             self.onboardingWindow?.makeKeyAndOrderFront(nil)
             
             NSApp.activate(ignoringOtherApps: true)
-            NSLog("[LinkKey] Window ordered front. Visible: \(self.onboardingWindow?.isVisible ?? false)")
+            NSLog("[CopyThat] Window ordered front. Visible: \(self.onboardingWindow?.isVisible ?? false)")
         }
     }
 
     @objc func onboardingWindowDidClose(_ notification: Notification) {
-        NSLog("[LinkKey] Onboarding window closed")
+        NSLog("[CopyThat] Onboarding window closed")
         onboardingWindow = nil // Nil it out so it can be recreated correctly
         refreshActivationPolicy()
     }
@@ -556,7 +556,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     @objc func onPressHideMenuBar() {
         let alert = NSAlert()
         alert.messageText = "Hide Menu Bar Icon?"
-        alert.informativeText = "The menu bar icon will be hidden until you quit and relaunch LinkKey. You can quit the app using Activity Monitor or by running 'killall LinkKey' in Terminal."
+        alert.informativeText = "The menu bar icon will be hidden until you quit and relaunch CopyThat. You can quit the app using Activity Monitor or by running 'killall CopyThat' in Terminal."
         alert.alertStyle = .warning
         alert.addButton(withTitle: "Hide Icon")
         alert.addButton(withTitle: "Cancel")
@@ -618,8 +618,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     @objc func onPressTestNotification() {
-        let testMessage = Message(rowId: 0, guid: "test-\(UUID().uuidString)", text: "Your LinkKey test code is 123456", handle: "LinkKey Test", group: nil, fromMe: false)
-        let parsed = ParsedOTP(service: "LinkKey Test", code: "123456")
+        let testMessage = Message(rowId: 0, guid: "test-\(UUID().uuidString)", text: "Your CopyThat test code is 123456", handle: "CopyThat Test", group: nil, fromMe: false)
+        let parsed = ParsedOTP(service: "CopyThat Test", code: "123456")
         showOverlayForMessage((testMessage, parsed))
     }
 

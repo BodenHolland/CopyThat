@@ -3,10 +3,10 @@
 # Exit on error
 set -e
 
-PROJECT_NAME="LinkKey"
-SCHEME_NAME="LinkKey"
+PROJECT_NAME="CopyThat"
+SCHEME_NAME="CopyThat"
 CONFIGURATION="Release"
-DMG_NAME="LinkKey.dmg"
+DMG_NAME="CopyThat.dmg"
 BUILD_DIR="build_release"
 APP_NAME="${PROJECT_NAME}.app"
 
