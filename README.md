@@ -15,4 +15,4 @@ CopyThat is a utility application for macOS that automatically detects two-facto
 4. Press **Cmd + R** to run.
 
 ## License
-MIT License
+CC0 License
