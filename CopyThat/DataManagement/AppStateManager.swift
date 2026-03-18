@@ -2,8 +2,6 @@
 //  AppStateManager.swift
 //  CopyThat
 //
-//  Created by Drew Pomerleau on 4/25/22.
-//
 
 import Foundation
 import ServiceManagement

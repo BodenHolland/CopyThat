@@ -1,8 +1,6 @@
 //
 //  OverlayView.swift
-//  ohtipi
-//
-//  Created by Drew Pomerleau on 4/25/22.
+//  CopyThat
 //
 
 import SwiftUI

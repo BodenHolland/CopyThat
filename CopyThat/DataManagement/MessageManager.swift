@@ -1,18 +1,16 @@
 //
 //  MessageManager.swift
-//  ohtipi
-//
-//  Created by Drew Pomerleau on 4/22/22.
+//  CopyThat
 //
 
 import Foundation
 import SQLite
 
-typealias MessageWithParsedOTP = (Message, ParsedOTP)
+typealias ParsedMessage = (Message, ParsedOTP)
 typealias Expression = SQLite.Expression
 
 class MessageManager: ObservableObject {
-    @Published var messages: [MessageWithParsedOTP] = []
+    @Published var messages: [ParsedMessage] = []
 
     private var processedGuids: Set<String> = []
     private var lastProcessedRowId: Int = 0
@@ -508,7 +506,7 @@ class MessageManager: ObservableObject {
         }
     }
     
-    private func findPossibleOTPMessagesAfterRowId(_ rowId: Int) throws -> [MessageWithParsedOTP] {
+    private func findPossibleOTPMessagesAfterRowId(_ rowId: Int) throws -> [ParsedMessage] {
         let messagesFromDB = try loadMessagesAfterRowId(rowId)
 
         // Update lastProcessedRowId to the highest ROWID we've seen
@@ -517,7 +515,7 @@ class MessageManager: ObservableObject {
         }
 
         let filteredMessages = messagesFromDB
-            .filter { !isInvalidMessageBodyValidPerCustomBlacklist($0.text) }
+            .filter { !isInvalidMessageBody($0.text) }
             .filter { !processedGuids.contains($0.guid) }
 
         filteredMessages.forEach { message in
@@ -530,7 +528,7 @@ class MessageManager: ObservableObject {
         }
     }
     
-    private func isInvalidMessageBodyValidPerCustomBlacklist(_ messageBody: String) -> Bool {
+    private func isInvalidMessageBody(_ messageBody: String) -> Bool {
         return (
             messageBody.isEmpty ||
             messageBody.count < 5 ||

@@ -53,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     var cancellable: Set<AnyCancellable> = []
     
-    var mostRecentMessages: [MessageWithParsedOTP] = []
+    var mostRecentMessages: [ParsedMessage] = []
     var lastNotificationMessage: Message? = nil
     var shouldShowNotificationOverlay = false
     var originalClipboardContents: String? = nil
@@ -221,7 +221,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         googleMessagesManager?.startListening()
     }
 
-    func showOverlayForMessage(_ message: MessageWithParsedOTP) {
+    func showOverlayForMessage(_ message: ParsedMessage) {
         if let overlayWindow = overlayWindow {
             overlayWindow.close()
             self.overlayWindow = nil

@@ -2,14 +2,14 @@
 //  GoogleMessagesManager.swift
 //  CopyThat
 //
-//  Monitors for notifications from Google Messages Pake app via HTTP server
+//  Monitors notifications from Google Messages for Web via local HTTP server
 //
 
 import Foundation
 import Combine
 
 class GoogleMessagesManager: ObservableObject {
-    @Published var messages: [MessageWithParsedOTP] = []
+    @Published var messages: [ParsedMessage] = []
 
     private var processedIds: Set<String> = []
     private var otpParser: OTPParser
@@ -29,7 +29,7 @@ class GoogleMessagesManager: ObservableObject {
             return
         }
 
-        // Convert cached messages back to MessageWithParsedOTP
+        // Convert cached messages back to ParsedMessage
         for cachedMsg in cached {
             processedIds.insert(cachedMsg.id)
             let message = Message(
@@ -47,7 +47,7 @@ class GoogleMessagesManager: ObservableObject {
 
     private func saveCachedMessages() {
         let cached = messages.suffix(maxCachedMessages).map { msg, otp in
-            CachedMessage(id: msg.guid, text: msg.text ?? "", code: otp.code, service: otp.service)
+            CachedMessage(id: msg.guid, text: msg.text, code: otp.code, service: otp.service)
         }
 
         if let data = try? JSONEncoder().encode(cached) {

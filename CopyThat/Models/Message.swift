@@ -1,8 +1,6 @@
 //
 //  Message.swift
-//  ohtipi
-//
-//  Created by Drew Pomerleau on 4/24/22.
+//  CopyThat
 //
 
 import Foundation
